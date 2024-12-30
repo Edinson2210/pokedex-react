@@ -10,6 +10,8 @@ import {
   usePokemonSpecies,
 } from "../../hooks";
 import * as FaIcons from "react-icons/fa";
+import { Header } from "../home/header/Header";
+import { useGlobalPokemons } from "../../hooks/useGlobalPokemons";
 
 export default function CardPage() {
   const { id } = useParams();
@@ -17,6 +19,7 @@ export default function CardPage() {
   const itemPokemon = usePokemonData(id);
   const especiePokemon = usePokemonSpecies(itemPokemon?.species?.url);
   const evoluciones = usePokemonEvolutions(especiePokemon);
+  const { setXpage, xpage } = useGlobalPokemons();
 
   useEffect(() => {
     const getPokemon = async () => {
@@ -36,13 +39,16 @@ export default function CardPage() {
   const navigate = useNavigate();
   const onNavigateBack = () => {
     navigate(-1);
+    setXpage(localStorage.getItem("page"));
   };
   const onNavigateHome = () => {
     navigate("/");
   };
   const handleNavigate = (id) => {
-    navigate(`/pokemon/${id}`);
+    const pokeActive = itemPokemon?.id == id;
+    if (!pokeActive) navigate(`/pokemon/${id}`);
   };
+
   return (
     <div className={css.container}>
       <div key={itemPokemon.id} className={css.card}>
@@ -50,8 +56,6 @@ export default function CardPage() {
           className={css.img_poke}
           src={itemPokemon?.sprites?.other["home"]?.front_default}
           alt="pokemon"
-          onClick={() => handleNavigate(itemPokemon.id)}
-          style={{ cursor: "pointer" }}
         />
         <div className={`bg-${especiePokemon?.color} ${css.sub_card}`}>
           <strong className={css.id_card}>#{pokeID}</strong>
@@ -93,7 +97,13 @@ export default function CardPage() {
                     alt="evo"
                     className={css.img}
                     onClick={() => handleNavigate(evo.id)}
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      filter:
+                        evo?.id == itemPokemon?.id
+                          ? "brightness(0.5)"
+                          : "brightness(1)",
+                      cursor: "pointer",
+                    }}
                   />
                   <h6>{evo.name}</h6>
                 </div>

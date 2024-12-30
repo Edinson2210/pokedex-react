@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import CardPage from "./pages/cards/CardPage.jsx";
 
-//TODO: Ver alguna forma de mejorar la performance de la página.
 //TODO: Mejorar el tema de las evoluciones cuando son diferentes opciones.
 //TODO: Agregar un filtro por tipo.
 //TODO: Agregar un filtro por generación.

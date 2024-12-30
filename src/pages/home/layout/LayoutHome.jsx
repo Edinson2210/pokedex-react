@@ -5,36 +5,11 @@ import axios from "axios";
 import * as FaIcons from "react-icons/fa";
 import { URL_POKEMON } from "../../../api/apiRest";
 import Card from "../list/CardList";
+import { useGlobalPokemons } from "../../../hooks/useGlobalPokemons";
 
 export default function LayoutHome() {
-  const [arrayPokemon, setArrayPokemon] = useState([]);
-  const [globalPokemon, setGlobalPokemon] = useState([]);
-  const [xpage, setXpage] = useState(1);
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    const api = async () => {
-      const limit = 25;
-      const xp = (xpage - 1) * limit;
-      const apiPoke = await axios.get(
-        `${URL_POKEMON}/?offset=${xp}&limit=${limit}`
-      );
-
-      setArrayPokemon(apiPoke.data.results);
-    };
-
-    api();
-    getGlobalPokemons();
-  }, [xpage]);
-
-  const getGlobalPokemons = async () => {
-    const res = await axios.get(`${URL_POKEMON}?offset=0&limit=1300`);
-    const promises = res.data.results.map((pokemon) => {
-      return pokemon;
-    });
-    const results = await Promise.all(promises);
-    setGlobalPokemon(results);
-  };
+  const { globalPokemon, xpage, setXpage, arrayPokemon } = useGlobalPokemons();
 
   const filterPokemon =
     search.length > 0
@@ -46,17 +21,15 @@ export default function LayoutHome() {
     setSearch(texto);
     setXpage(xpage);
   };
-
   const arrayPage = Array.from({ length: 41 }, (_, i) => i + 1);
   const selectPage = arrayPage.map((page) => {
     return <option key={page}>{page}</option>;
   });
   const showError = filterPokemon.length === 0 && search.length > 0;
-
+  localStorage.setItem("page", xpage);
   return (
     <div className={css.layout}>
       <Header obtenerSearch={obtenerSearch} />
-
       <div className={css.div_content}>
         <div className={css.card_content}>
           {filterPokemon.map((card, index) => {

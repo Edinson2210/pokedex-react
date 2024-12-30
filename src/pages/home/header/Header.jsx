@@ -2,6 +2,7 @@ import React from "react";
 import * as FaIcons from "react-icons/fa";
 import css from "./header.module.scss";
 import logo from "../../../assets/pokemon.png";
+import Input from "../../../styles/buttonSearch";
 
 export const Header = ({ obtenerSearch }) => {
   return (
@@ -11,13 +12,14 @@ export const Header = ({ obtenerSearch }) => {
           <img src={logo} alt="logo" />
         </div>
         <div className={css.div_search}>
-          <div>
+          <Input obtenerSearch={obtenerSearch} />
+          {/* <div>
             <FaIcons.FaSearch />
           </div>
           <input
             type="search"
             onChange={(e) => obtenerSearch(e.target.value)}
-          />
+          /> */}
         </div>
       </div>
     </nav>

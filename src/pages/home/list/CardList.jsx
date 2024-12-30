@@ -1,15 +1,10 @@
 import css from "./cardList.module.scss";
 import { useNavigate } from "react-router-dom";
-import {
-  usePokemonData,
-  usePokemonEvolutions,
-  usePokemonSpecies,
-} from "../../../hooks";
+import { usePokemonData, usePokemonSpecies } from "../../../hooks";
 
 export default function Card({ card }) {
   const itemPokemon = usePokemonData(card.name);
   const especiePokemon = usePokemonSpecies(card.url);
-  const evoluciones = usePokemonEvolutions(especiePokemon);
 
   let pokeID = itemPokemon?.id?.toString();
   if (pokeID?.length === 1) {
@@ -32,7 +27,10 @@ export default function Card({ card }) {
         <div className={css.div_img}>
           <img
             className={css.img_poke}
-            src={itemPokemon?.sprites?.other["home"]?.front_default}
+            src={
+              itemPokemon?.sprites?.other["dream_world"]?.front_default ||
+              itemPokemon?.sprites?.other["official-artwork"]?.front_default
+            }
             alt="pokemon"
             onClick={() => handleNavigate(itemPokemon.id)}
             style={{ cursor: "pointer" }}
