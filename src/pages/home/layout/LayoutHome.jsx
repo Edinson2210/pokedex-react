@@ -57,63 +57,64 @@ export default function LayoutHome() {
     <div className={css.layout}>
       <Header obtenerSearch={obtenerSearch} />
 
-      <div className={css.card_content}>
-        {filterPokemon.map((card, index) => {
-          return <Card key={index} card={card} />;
-        })}
-      </div>
-
-      <section className={css.section_pagination}>
-        <div className={css.div_pagination}>
-          <span
-            className={css.item_izquierdo}
-            onClick={() => {
-              setXpage(1);
-              scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
-            <FaIcons.FaAngleDoubleLeft />
-          </span>
-          <span
-            className={css.item_izquierdo}
-            onClick={() => {
-              if (xpage > 1) setXpage(xpage - 1);
-              scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
-            <FaIcons.FaAngleLeft />
-          </span>
-          <select
-            className={css.item}
-            value={xpage}
-            onClick={scrollTo({ top: 0, behavior: "smooth" })}
-            onChange={(e) => setXpage(Number(e.target.value))}
-          >
-            {" "}
-            {selectPage}
-          </select>
-          <span className={css.item}> DE </span>
-          <span className={css.item}> {41} </span>
-          <span
-            className={css.item_derecho}
-            onClick={() => {
-              if (xpage < 41) setXpage(xpage + 1);
-              scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
-            <FaIcons.FaAngleRight />
-          </span>
-          <span
-            className={css.item_derecho}
-            onClick={() => {
-              setXpage(41);
-              scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
-            <FaIcons.FaAngleDoubleRight />
-          </span>
+      <div className={css.div_content}>
+        <div className={css.card_content}>
+          {filterPokemon.map((card, index) => {
+            return <Card key={index} card={card} />;
+          })}
         </div>
-      </section>
+        <section className={css.section_pagination}>
+          <div className={css.div_pagination}>
+            <span
+              className={css.item_izquierdo}
+              onClick={() => {
+                setXpage(1);
+                scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              <FaIcons.FaAngleDoubleLeft />
+            </span>
+            <span
+              className={css.item_izquierdo}
+              onClick={() => {
+                if (xpage > 1) setXpage(xpage - 1);
+                scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              <FaIcons.FaAngleLeft />
+            </span>
+            <select
+              className={css.item}
+              value={xpage}
+              onClick={scrollTo({ top: 0, behavior: "smooth" })}
+              onChange={(e) => setXpage(Number(e.target.value))}
+            >
+              {" "}
+              {selectPage}
+            </select>
+            <span className={css.item}> DE </span>
+            <span className={css.item}> {41} </span>
+            <span
+              className={css.item_derecho}
+              onClick={() => {
+                if (xpage < 41) setXpage(xpage + 1);
+                scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              <FaIcons.FaAngleRight />
+            </span>
+            <span
+              className={css.item_derecho}
+              onClick={() => {
+                setXpage(41);
+                scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              <FaIcons.FaAngleDoubleRight />
+            </span>
+          </div>
+        </section>
+      </div>
 
       <div
         className={css.div_error}
