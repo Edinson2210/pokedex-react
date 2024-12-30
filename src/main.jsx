@@ -15,7 +15,7 @@ import CardPage from "./pages/cards/CardPage.jsx";
 //TODO: Agregar un filtro por tipo.
 //TODO: Agregar un filtro por generación.
 //TODO: Agregar a la tarjeta del Pokemon detallada formas y megas.
-//TODO: Agregar a la tarjeta del Pokemon detallada habilidades.
+//TODO: Traducir el hábitat, tipos, stats.
 //TODO: Mejorar el botón de regreso de la página de la carta para que regrese a la página anterior tal cual estaba, y no al inicio.
 
 const router = createBrowserRouter([
