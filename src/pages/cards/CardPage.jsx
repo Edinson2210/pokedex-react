@@ -19,7 +19,6 @@ export default function CardPage() {
   const itemPokemon = usePokemonData(id);
   const especiePokemon = usePokemonSpecies(itemPokemon?.species?.url);
   const evoluciones = usePokemonEvolutions(especiePokemon);
-  const { setXpage, xpage } = useGlobalPokemons();
 
   useEffect(() => {
     const getPokemon = async () => {
@@ -39,13 +38,12 @@ export default function CardPage() {
   const navigate = useNavigate();
   const onNavigateBack = () => {
     navigate(-1);
-    setXpage(localStorage.getItem("page"));
   };
   const onNavigateHome = () => {
     navigate("/");
   };
   const handleNavigate = (id) => {
-    const pokeActive = itemPokemon?.id == id;
+    const pokeActive = itemPokemon?.id === Number(id);
     if (!pokeActive) navigate(`/pokemon/${id}`);
   };
 
@@ -99,7 +97,7 @@ export default function CardPage() {
                     onClick={() => handleNavigate(evo.id)}
                     style={{
                       filter:
-                        evo?.id == itemPokemon?.id
+                        Number(evo?.id) === itemPokemon?.id
                           ? "brightness(0.5)"
                           : "brightness(1)",
                       cursor: "pointer",

@@ -13,13 +13,6 @@ export const Header = ({ obtenerSearch }) => {
         </div>
         <div className={css.div_search}>
           <Input obtenerSearch={obtenerSearch} />
-          {/* <div>
-            <FaIcons.FaSearch />
-          </div>
-          <input
-            type="search"
-            onChange={(e) => obtenerSearch(e.target.value)}
-          /> */}
         </div>
       </div>
     </nav>

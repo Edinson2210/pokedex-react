@@ -9,7 +9,7 @@ const Input = ({ obtenerSearch }) => {
           type="search"
           name="search"
           className="input"
-          placeholder="Busca un Pokemon..."
+          placeholder="Busca un Pokemon"
           onChange={(e) => obtenerSearch(e.target.value)}
         />
         <svg
@@ -70,7 +70,7 @@ const StyledWrapper = styled.div`
   .input:not(:placeholder-shown) {
     background-color: #fff;
     border: 1px solid rgb(91, 107, 255);
-    width: 200px;
+    width: 195px;
     cursor: text;
     padding: 18px 16px 18px 45px;
   }

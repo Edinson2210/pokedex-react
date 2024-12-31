@@ -5,7 +5,7 @@ import axios from "axios";
 export const useGlobalPokemons = () => {
   const [arrayPokemon, setArrayPokemon] = useState([]);
   const [globalPokemon, setGlobalPokemon] = useState([]);
-  const [xpage, setXpage] = useState(localStorage.getItem("page"));
+  const [xpage, setXpage] = useState(1);
 
   useEffect(() => {
     const api = async () => {

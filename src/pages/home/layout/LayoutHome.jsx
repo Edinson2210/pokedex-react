@@ -26,7 +26,6 @@ export default function LayoutHome() {
     return <option key={page}>{page}</option>;
   });
   const showError = filterPokemon.length === 0 && search.length > 0;
-  localStorage.setItem("page", xpage);
   return (
     <div className={css.layout}>
       <Header obtenerSearch={obtenerSearch} />
