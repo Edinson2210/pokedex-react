@@ -9,9 +9,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import CardPage from "./pages/cards/CardPage.jsx";
+import TypesList from "./pages/types/TypesList.jsx";
 
 //TODO: Mejorar el tema de las evoluciones cuando son diferentes opciones.
-//TODO: Agregar un filtro por tipo.
+//TODO: Arreglar el filtro por tipo, imágenes que no aparecen, pokemones que se repiten cuando debería aparecer otra forma, y paginación.
 //TODO: Agregar un filtro por generación.
 //TODO: Agregar a la tarjeta del Pokemon detallada formas y megas.
 //TODO: Traducir el hábitat, tipos, stats.
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     path: "pokemon/:id",
     element: <CardPage />,
   },
+  {
+    path: "type/:type",
+    element: <TypesList />,
+  },
   // {
   //   path: "*",
   //   element: <Navigate to="/" />,
@@ -33,7 +38,7 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+  // <StrictMode>
+  <RouterProvider router={router} />
+  // </StrictMode>
 );

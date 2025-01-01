@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import css from "./layout.module.scss";
 import { Header } from "../header/Header";
-import axios from "axios";
 import * as FaIcons from "react-icons/fa";
-import { URL_POKEMON } from "../../../api/apiRest";
-import Card from "../list/CardList";
+import CardList from "../list/CardList";
 import { useGlobalPokemons } from "../../../hooks/useGlobalPokemons";
-import queryString from "query-string";
 import { useNavigate } from "react-router-dom";
 
 export default function LayoutHome() {
   const [search, setSearch] = useState("");
   const { globalPokemon, xpage, setXpage, arrayPokemon } = useGlobalPokemons();
-  // const { page } = queryString.parse(window.location.search);
-  // const page = queryString.parse(window.location.search).page;
-  // console.log(page);
-  // const statePage = () => {
-  //   if (page) {
-  //     setXpage(Number(page));
-  //   } else {
-  //     setXpage(1);
-  //   }
-  // };
 
   const filterPokemon =
     search.length > 0
@@ -46,8 +33,15 @@ export default function LayoutHome() {
       <div className={css.div_content}>
         <div className={css.card_content}>
           {filterPokemon.map((card, index) => {
-            return <Card key={index} card={card} />;
+            return <CardList key={index} card={card} />;
           })}
+        </div>
+        <div
+          className={css.div_error}
+          style={{ display: showError ? "" : "none" }}
+        >
+          Haz fallado como entrenador Pokemon porque <b> "{search}" </b> no
+          existe.
         </div>
         <section className={css.section_pagination}>
           <div className={css.div_pagination}>
@@ -111,14 +105,6 @@ export default function LayoutHome() {
             </span>
           </div>
         </section>
-      </div>
-
-      <div
-        className={css.div_error}
-        style={{ display: showError ? "" : "none" }}
-      >
-        Haz fallado como entrenador Pokemon porque <b> "{search}" </b> no
-        existe.
       </div>
     </div>
   );

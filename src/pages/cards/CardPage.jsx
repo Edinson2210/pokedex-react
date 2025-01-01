@@ -46,6 +46,10 @@ export default function CardPage() {
     const pokeActive = itemPokemon?.id === Number(id);
     if (!pokeActive) navigate(`/pokemon/${id}`);
   };
+  const typeNavigate = (type) => {
+    navigate(`/type/${type}`);
+  };
+  console.log(itemPokemon);
 
   return (
     <div className={css.container}>
@@ -80,6 +84,8 @@ export default function CardPage() {
                 <h6
                   key={index}
                   className={`color-${type.type.name} ${css.color_type}`}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => typeNavigate(type.type.name)}
                 >
                   {type.type.name}
                 </h6>

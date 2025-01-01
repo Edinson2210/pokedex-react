@@ -2,9 +2,9 @@ import css from "./cardList.module.scss";
 import { useNavigate } from "react-router-dom";
 import { usePokemonData, usePokemonSpecies } from "../../../hooks";
 
-export default function Card({ card }) {
-  const itemPokemon = usePokemonData(card.name);
-  const especiePokemon = usePokemonSpecies(card.url);
+export default function CardList({ card }) {
+  const itemPokemon = usePokemonData(card?.name);
+  const especiePokemon = usePokemonSpecies(card?.url);
 
   let pokeID = itemPokemon?.id?.toString();
   if (pokeID?.length === 1) {
@@ -37,7 +37,7 @@ export default function Card({ card }) {
           />
         </div>
         <div className={css.div_name}>
-          <strong className={css.name_card}>{itemPokemon.name}</strong>
+          <strong className={css.name_card}>{itemPokemon?.name}</strong>
         </div>
       </div>
     </div>
