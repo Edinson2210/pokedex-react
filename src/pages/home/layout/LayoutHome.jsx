@@ -6,10 +6,22 @@ import * as FaIcons from "react-icons/fa";
 import { URL_POKEMON } from "../../../api/apiRest";
 import Card from "../list/CardList";
 import { useGlobalPokemons } from "../../../hooks/useGlobalPokemons";
+import queryString from "query-string";
+import { useNavigate } from "react-router-dom";
 
 export default function LayoutHome() {
   const [search, setSearch] = useState("");
   const { globalPokemon, xpage, setXpage, arrayPokemon } = useGlobalPokemons();
+  // const { page } = queryString.parse(window.location.search);
+  // const page = queryString.parse(window.location.search).page;
+  // console.log(page);
+  // const statePage = () => {
+  //   if (page) {
+  //     setXpage(Number(page));
+  //   } else {
+  //     setXpage(1);
+  //   }
+  // };
 
   const filterPokemon =
     search.length > 0
@@ -26,6 +38,8 @@ export default function LayoutHome() {
     return <option key={page}>{page}</option>;
   });
   const showError = filterPokemon.length === 0 && search.length > 0;
+  const navigate = useNavigate();
+
   return (
     <div className={css.layout}>
       <Header obtenerSearch={obtenerSearch} />
@@ -41,6 +55,7 @@ export default function LayoutHome() {
               className={css.item_izquierdo}
               onClick={() => {
                 setXpage(1);
+                navigate(`/?page=${1}`);
                 scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
@@ -49,7 +64,10 @@ export default function LayoutHome() {
             <span
               className={css.item_izquierdo}
               onClick={() => {
-                if (xpage > 1) setXpage(xpage - 1);
+                if (xpage > 1) {
+                  setXpage(xpage - 1);
+                  navigate(`/?page=${xpage - 1}`);
+                }
                 scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
@@ -59,7 +77,10 @@ export default function LayoutHome() {
               className={css.item}
               value={xpage}
               onClick={scrollTo({ top: 0, behavior: "smooth" })}
-              onChange={(e) => setXpage(Number(e.target.value))}
+              onChange={(e) => {
+                setXpage(Number(e.target.value));
+                navigate(`/?page=${e.target.value}`);
+              }}
             >
               {" "}
               {selectPage}
@@ -69,7 +90,10 @@ export default function LayoutHome() {
             <span
               className={css.item_derecho}
               onClick={() => {
-                if (xpage < 41) setXpage(xpage + 1);
+                if (xpage < 41) {
+                  setXpage(xpage + 1);
+                  navigate(`/?page=${xpage + 1}`);
+                }
                 scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
@@ -79,6 +103,7 @@ export default function LayoutHome() {
               className={css.item_derecho}
               onClick={() => {
                 setXpage(41);
+                navigate(`/?page=${41}`);
                 scrollTo({ top: 0, behavior: "smooth" });
               }}
             >

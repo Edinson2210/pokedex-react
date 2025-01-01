@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { URL_POKEMON } from "../api/apiRest";
 import axios from "axios";
+import queryString from "query-string";
 
 export const useGlobalPokemons = () => {
   const [arrayPokemon, setArrayPokemon] = useState([]);
@@ -17,6 +18,15 @@ export const useGlobalPokemons = () => {
 
       setArrayPokemon(apiPoke.data.results);
     };
+
+    const page = queryString.parse(window.location.search).page;
+    // console.log(page);
+    const statePage = () => {
+      if (page) {
+        setXpage(Number(page));
+      }
+    };
+    statePage();
     api();
     getGlobalPokemons();
   }, [xpage]);

@@ -26,10 +26,10 @@ const router = createBrowserRouter([
     path: "pokemon/:id",
     element: <CardPage />,
   },
-  {
-    path: "*",
-    element: <Navigate to="/" />,
-  },
+  // {
+  //   path: "*",
+  //   element: <Navigate to="/" />,
+  // },
 ]);
 
 createRoot(document.getElementById("root")).render(
