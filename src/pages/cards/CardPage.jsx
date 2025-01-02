@@ -49,8 +49,31 @@ export default function CardPage() {
   const typeNavigate = (type) => {
     navigate(`/type/${type}`);
   };
-  console.log(especiePokemon);
-
+  const generacion = especiePokemon.data?.generation.name;
+  const changeGeneration = () => {
+    switch (generacion) {
+      case "generation-i":
+        return "Kanto";
+      case "generation-ii":
+        return "Jotho";
+      case "generation-iii":
+        return "Hoenn";
+      case "generation-iv":
+        return "Sinnoh";
+      case "generation-v":
+        return "Teselia";
+      case "generation-vi":
+        return "Kalos";
+      case "generation-vii":
+        return "Alola";
+      case "generation-viii":
+        return "Galar";
+      case "generation-ix":
+        return "Paldea";
+      default:
+        break;
+    }
+  };
   return (
     <div className={css.container}>
       <div className={css.div_return}>
@@ -70,19 +93,18 @@ export default function CardPage() {
         <div className={`bg-${especiePokemon?.color} ${css.sub_card}`}>
           <strong className={css.id_card}>#{pokeID}</strong>
           <strong className={css.name_card}>{itemPokemon.name}</strong>
+          <h4 className={css.altura_poke}>
+            {especiePokemon.data?.genera[5].genus}{" "}
+          </h4>
           <h4 className={css.altura_poke}>Altura: {itemPokemon.height} cm</h4>
           <h4 className={css.peso_poke}>Peso: {itemPokemon.weight} Kg</h4>
           <h4 className={css.habitat_poke}>
             Habitat: {especiePokemon?.habitat}
           </h4>
-          <h4 className={css.peso_poke}>
-            {especiePokemon.data?.generation.name}
-          </h4>
+          <h4 className={css.peso_poke}> Región: {changeGeneration()}</h4>
           <h4 className={css.description_poke}>
-            Descripción:{" "}
-            <GenerationDescription
-              generacion={especiePokemon.data?.generation.name}
-            />{" "}
+            {" "}
+            <GenerationDescription generacion={generacion} />{" "}
           </h4>
           <div className={css.div_stats}>
             {itemPokemon?.stats?.map((stat, index) => {
