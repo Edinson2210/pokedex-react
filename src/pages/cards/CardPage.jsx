@@ -11,7 +11,7 @@ import {
 } from "../../hooks";
 import * as FaIcons from "react-icons/fa";
 import { Header } from "../home/header/Header";
-import { useGlobalPokemons } from "../../hooks/useGlobalPokemons";
+import GenerationDescription from "../../components/GenerationDescription";
 
 export default function CardPage() {
   const { id } = useParams();
@@ -49,10 +49,18 @@ export default function CardPage() {
   const typeNavigate = (type) => {
     navigate(`/type/${type}`);
   };
-  console.log(itemPokemon);
+  console.log(especiePokemon);
 
   return (
     <div className={css.container}>
+      <div className={css.div_return}>
+        <button className={css.button_return} onClick={onNavigateBack}>
+          <FaIcons.FaChevronLeft />
+        </button>
+        <button className={css.button_return} onClick={onNavigateHome}>
+          <FaIcons.FaHome />
+        </button>
+      </div>
       <div key={itemPokemon.id} className={css.card}>
         <img
           className={css.img_poke}
@@ -66,6 +74,15 @@ export default function CardPage() {
           <h4 className={css.peso_poke}>Peso: {itemPokemon.weight} Kg</h4>
           <h4 className={css.habitat_poke}>
             Habitat: {especiePokemon?.habitat}
+          </h4>
+          <h4 className={css.peso_poke}>
+            {especiePokemon.data?.generation.name}
+          </h4>
+          <h4 className={css.description_poke}>
+            Descripción:{" "}
+            <GenerationDescription
+              generacion={especiePokemon.data?.generation.name}
+            />{" "}
           </h4>
           <div className={css.div_stats}>
             {itemPokemon?.stats?.map((stat, index) => {
@@ -115,14 +132,6 @@ export default function CardPage() {
             })}
           </div>
         </div>
-      </div>
-      <div className={css.div_return}>
-        <button className={css.button_return} onClick={onNavigateBack}>
-          <FaIcons.FaChevronLeft />
-        </button>
-        <button className={css.button_return} onClick={onNavigateHome}>
-          <FaIcons.FaHome />
-        </button>
       </div>
     </div>
   );

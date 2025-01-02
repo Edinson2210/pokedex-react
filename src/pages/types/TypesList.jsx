@@ -45,7 +45,7 @@ export default function TypesList() {
       <div className={css.div_content}>
         <div className={css.card_content}>
           {filterPokemon?.map((pokemon) => (
-            <CardList key={pokemon.data?.name} card={pokemon.data?.species} />
+            <CardList key={pokemon.id} card={pokemon.data?.species} />
           ))}
         </div>
         <div
