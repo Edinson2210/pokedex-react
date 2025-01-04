@@ -3,9 +3,8 @@ import css from "./typesList.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import { Header } from "../home/header/Header";
-import { usePokemonData } from "../../hooks";
+import { useFilteredPokemon, usePokemonData } from "../../hooks";
 import CardList from "../home/list/CardList";
-import { useFilteredPokemon } from "../../hooks/useFilteredPokemon";
 
 export default function TypesList() {
   const { type } = useParams();
@@ -34,14 +33,13 @@ export default function TypesList() {
   });
   const showError = filterPokemon.length === 0 && search.length > 0;
   const navigate = useNavigate();
-  console.log(filteredPokemon);
 
   return (
     <div className={css.layout}>
       <Header obtenerSearch={obtenerSearch} />
       <div className={css.div_content}>
         <div className={css.card_content}>
-          {filteredPokemon?.map((pokemon) => (
+          {filterPokemon?.map((pokemon) => (
             <CardList key={pokemon.id} card={pokemon.data.species} />
           ))}
         </div>
