@@ -17,7 +17,6 @@ export default function CardList({ card }) {
   const handleNavigate = (id) => {
     navigate(`/pokemon/${id}`);
   };
-
   return (
     <div key={itemPokemon.id} className={css.card}>
       <div className={`bg-${especiePokemon?.color} ${css.sub_card}`}>

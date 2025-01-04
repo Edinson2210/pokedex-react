@@ -19,14 +19,14 @@ export const useGlobalPokemons = () => {
       setArrayPokemon(apiPoke.data.results);
     };
 
-      const page = queryString.parse(window.location.search).page;
-      // console.log(page);
-      const statePage = () => {
-        if (page) {
-          setXpage(Number(page));
-        }
-      };
-      statePage();
+    const page = queryString.parse(window.location.search).page;
+    // console.log(page);
+    const statePage = () => {
+      if (page) {
+        setXpage(Number(page));
+      }
+    };
+    statePage();
     api();
     getGlobalPokemons();
   }, [xpage]);

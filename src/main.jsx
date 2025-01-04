@@ -9,7 +9,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import CardPage from "./pages/cards/CardPage.jsx";
-import TypesList from "./pages/types/TypesList.jsx";
+import TypesList from "./pages/type/TypesList.jsx";
+import RegionList from "./pages/region/RegionList.jsx";
 
 //TODO: Mejorar el tema de las evoluciones cuando son diferentes opciones.
 //TODO: Arreglar el filtro por tipo, imágenes que no aparecen, pokemones que se repiten cuando debería aparecer otra forma, y paginación.
@@ -31,10 +32,10 @@ const router = createBrowserRouter([
     path: "type/:type",
     element: <TypesList />,
   },
-  // {
-  //   path: "*",
-  //   element: <Navigate to="/" />,
-  // },
+  {
+    path: "*",
+    element: <Navigate to="/" />,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(

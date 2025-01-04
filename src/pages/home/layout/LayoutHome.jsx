@@ -5,6 +5,7 @@ import * as FaIcons from "react-icons/fa";
 import CardList from "../list/CardList";
 import { useGlobalPokemons } from "../../../hooks/useGlobalPokemons";
 import { useNavigate } from "react-router-dom";
+import { FilterBar } from "../../../components/FilterBar";
 
 export default function LayoutHome() {
   const [search, setSearch] = useState("");
@@ -30,6 +31,7 @@ export default function LayoutHome() {
   return (
     <div className={css.layout}>
       <Header obtenerSearch={obtenerSearch} />
+      <FilterBar />
       <div className={css.div_content}>
         <div className={css.card_content}>
           {filterPokemon.map((card, index) => {

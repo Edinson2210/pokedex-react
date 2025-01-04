@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useGlobalPokemons } from "../../hooks/useGlobalPokemons";
+import React, { useState } from "react";
 import css from "./typesList.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import { Header } from "../home/header/Header";
 import { usePokemonData } from "../../hooks";
 import CardList from "../home/list/CardList";
-import axios from "axios";
-import { URL_POKEMON } from "../../api/apiRest";
 import { useFilteredPokemon } from "../../hooks/useFilteredPokemon";
 
 export default function TypesList() {
@@ -15,12 +12,11 @@ export default function TypesList() {
   const [search, setSearch] = useState("");
   const [tpage, setTpage] = useState(1);
   const filteredPokemon = useFilteredPokemon(type);
-  const { arrayPokemon } = useGlobalPokemons();
 
   const filterPokemon =
     search.length > 0
       ? filteredPokemon?.filter((pokemon) =>
-          pokemon?.data.name?.includes(search)
+          pokemon?.data?.name?.includes(search)
         )
       : filteredPokemon?.slice((tpage - 1) * 25, tpage * 25);
 
@@ -38,14 +34,15 @@ export default function TypesList() {
   });
   const showError = filterPokemon.length === 0 && search.length > 0;
   const navigate = useNavigate();
+  console.log(filteredPokemon);
 
   return (
     <div className={css.layout}>
       <Header obtenerSearch={obtenerSearch} />
       <div className={css.div_content}>
         <div className={css.card_content}>
-          {filterPokemon?.map((pokemon) => (
-            <CardList key={pokemon.id} card={pokemon.data?.species} />
+          {filteredPokemon?.map((pokemon) => (
+            <CardList key={pokemon.id} card={pokemon.data.species} />
           ))}
         </div>
         <div

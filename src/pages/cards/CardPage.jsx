@@ -49,13 +49,16 @@ export default function CardPage() {
   const typeNavigate = (type) => {
     navigate(`/type/${type}`);
   };
+  const regionNavigate = (region) => {
+    navigate(`/region/${region}`);
+  };
   const generacion = especiePokemon.data?.generation.name;
   const changeGeneration = () => {
     switch (generacion) {
       case "generation-i":
         return "Kanto";
       case "generation-ii":
-        return "Jotho";
+        return "Johto";
       case "generation-iii":
         return "Hoenn";
       case "generation-iv":
@@ -101,9 +104,15 @@ export default function CardPage() {
           <h4 className={css.habitat_poke}>
             Habitat: {especiePokemon?.habitat}
           </h4>
-          <h4 className={css.peso_poke}> Región: {changeGeneration()}</h4>
-          <h4 className={css.description_poke}>
+          <h4 className={css.peso_poke}> Región: </h4>
+          <span
+            className={css.region_poke}
+            onClick={() => regionNavigate(changeGeneration())}
+          >
             {" "}
+            {changeGeneration()}
+          </span>
+          <h4 className={css.description_poke}>
             <GenerationDescription generacion={generacion} />{" "}
           </h4>
           <div className={css.div_stats}>
